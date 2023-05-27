@@ -1,0 +1,126 @@
+body {
+  background-color: #ebedef;
+  color: #17202a;
+  font-family: "Lato", sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5em;
+}
+
+.container-header {
+  margin: 1em 9em 0 9em;
+}
+
+.container-header a{
+  color: #17202a;
+}
+
+.header-title {
+  display: flex; 
+  align-items: center;
+}
+
+.header-nav {
+  margin-left: auto;
+}
+
+.header-nav h4 {
+  display: inline;
+}
+
+.header-nav-last {
+  margin-left: 20px;
+}
+
+.container-article {
+  margin: 3em 9em;
+}
+
+h1 {
+  line-height: 1.2em;
+}
+
+a {
+  text-decoration: none;
+  color: teal;
+}
+
+iframe {
+  border-style: none;
+}
+
+.container-interactive-section {
+  margin: auto;
+  margin-top: 20px;
+  width: 70%;
+  background-color: whitesmoke;
+  padding: 10px;
+  line-height: 2em;
+}
+
+.single-input-derivative-slider-label,
+.multiple-input-derivative-slider-label,
+#multiple-input-derivative-selected-variable-1,
+#multiple-input-derivative-selected-variable-2 {
+  font-weight: bold;
+}
+
+#multiple-input-derivative-variable-selector {
+  padding: 0.313em;
+  border-radius: 0.25em;
+  background-color: #f7f7f7;
+  font-size: 1em;
+}
+
+#multiple-input-derivative-variable-selector option {
+  padding: 0.313em;
+}
+
+@media (max-width: 600px) {
+  .container-header {
+    margin: 1em 2em 0 2em;
+  }
+
+  .container-article {
+    margin: 2em 2em;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 700px) {
+  .container-header {
+    margin: 1em 3em 0 3em;
+  }
+
+  .container-article {
+    margin: 3em 3em;
+  }
+}
+
+@media only screen and (min-width: 701px) and (max-width: 800px) {
+  .container-header {
+    margin: 1em 4em 0 4em;
+  }
+
+  .container-article {
+    margin: 3em 4em;
+  }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 900px) {
+  .container-header {
+    margin: 1em 5em 0 5em;
+  }
+
+  .container-article {
+    margin: 3em 5em;
+  }
+}
+
+@media only screen and (min-width: 901px) and (max-width: 1000px) {
+  .container-header {
+    margin: 1em 6em 0 6em;
+  }
+
+  .container-article {
+    margin: 3em 6em;
+  }
+}
