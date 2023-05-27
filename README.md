@@ -1,4 +1,4 @@
-# x0axz.github.io
+# x0axz.com
 
 Greetings!
 
