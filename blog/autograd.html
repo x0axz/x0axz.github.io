@@ -47,11 +47,11 @@
     </header>
 
       <p>
-          In this article, we will build an Autograd engine that accepts N-dimensional arrays. Autograd is a tool used for derivative calculation. It tracks operations on values with enabled gradients and builds a dynamic computational graph — a graph without cycles. Input values serve as the leaves of the graph, while output values act as its roots. Gradients are computed by traversing the graph from root to leaf, applying the chain rule to multiply gradients at each step.<br /> <br />
+          In this article, we will build an Autograd engine and a neural network library that handle an N-dimensional array. Autograd is a tool used for derivative calculation. It tracks operations on values with enabled gradients and builds a dynamic computational graph — a graph without cycles. Input values serve as the leaves of the graph, while output values act as its roots. Gradients are computed by traversing the graph from root to leaf, applying the chain rule to multiply gradients at each step. <br /> <br />
 
           Neural networks are complex mathematical functions that are adjusted through a process called training to produce the desired output. Backpropagation is a key algorithm used in this training process. It computes gradients, which represent the change in loss for small adjustments in input weights and biases. These gradients are then utilised to update the weights and biases, with a learning rate applied to reduce the overall loss and train the neural network. This fine-tuning is also used to carefully adjust the parameters of a pre-trained model to adapt it to a specific task or dataset. The training process occurs iteratively, involving the calculation of multiple gradients. A computation graph is constructed to store these gradient functions. <br /> <br />
 
-          Andrej Karaphy's <a href="https://github.com/karpathy/micrograd">Micrograd</a> and his <a href="https://youtu.be/VMj-3S1tku0">video tutorial</a> about building Micrograd, from which I would take a few examples, served as inspiration for this article. But this Autograd engine will accept N-dimensional arrays, whereas Microgard accepts scalar values only. <br /> <br />
+          Andrej Karaphy's <a href="https://github.com/karpathy/micrograd">Micrograd</a> and his <a href="https://youtu.be/VMj-3S1tku0">video tutorial</a> about building Micrograd, from which I would take a few examples, served as inspiration for this article. But this Autograd engine will accept N-dimensional array, whereas Microgard accepts scalar values only. <br /> <br />
 
           While assuming a basic understanding of Python programming, high school calculus, and neural networks, I'll provide various teaching methods for those who may not have that background. This includes line-by-line Python code explanations and visualizations of the output. The article includes an interactive area to explore derivatives, utilizing concepts from calculus. For a comprehensive understanding, I recommend watching 3Blue1Brown's <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">video series</a> on neural networks and backpropagation. In the <a href="https://youtu.be/tIeHLnjs5U8?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">final video</a>, he covers the Chain Rule, which is the mathematical foundation of backpropagation. Additionally, Jay Alammar's <a href="https://jalammar.github.io/visual-interactive-guide-basics-neural-networks">article</a> on neural network basics is highly recommended. <br /> <br />
 
@@ -391,7 +391,7 @@
 
           <h2>Implementing backpropagation</h2>
 
-          Now that a basic understanding of the derivative has been established, let's move forward with building the neural networks. The first step involves creating a class capable of handling N-dimensional arrays. The values and gradients will be stored in this class, as neural networks entail complex mathematical expressions. The development of these data structures will commence promptly. However, prior to that, the process of backpropagation will be manually performed. Subsequently, the automation of backpropagation will be achieved using the example-based explanation provided below.
+          Now that a basic understanding of the derivative has been established, let's move forward with building the neural networks. The first step involves creating a class capable of handling N-dimensional array. The values and gradients will be stored in this class, as neural networks entail complex mathematical expressions. The development of these data structures will commence promptly. However, prior to that, the process of backpropagation will be manually performed. Subsequently, the automation of backpropagation will be achieved using the example-based explanation provided below.
 
           <h3>Manual backpropagation</h3>
 
@@ -621,15 +621,15 @@
 
           <ul>
             <li>
-              <code class="language-python">__radd__</code> method allows performing right addition by a scalar or <code class="language-python">Value</code> instance. It returns the result of addition <code class="language-python">self</code> by <code class="language-python">other</code> using the <code class="language-python">+</code> operator. <br /> <br />
+              <code class="language-python">__radd__</code> method allows performing right addition by the <code class="language-python">Value</code> instance. It returns the result of addition <code class="language-python">self</code> by <code class="language-python">other</code> using the <code class="language-python">+</code> operator. <br /> <br />
             </li>
 
             <li>
-              <code class="language-python">__rmul__</code> method allows performing right multiplication by a scalar or <code class="language-python">Value</code> instance. It returns the result of multiplying <code class="language-python">self</code> by <code class="language-python">other</code> using the <code class="language-python">*</code> operator. <br /> <br />
+              <code class="language-python">__rmul__</code> method allows performing right multiplication by the <code class="language-python">Value</code> instance. It returns the result of multiplying <code class="language-python">self</code> by <code class="language-python">other</code> using the <code class="language-python">*</code> operator. <br /> <br />
             </li>
 
             <li>
-              <code class="language-python">__truediv__</code> method allows performing true division by a scalar or <code class="language-python">Value</code> instance. It returns the result of dividing <code class="language-python">self</code> by <code class="language-python">other</code> using the <code class="language-python">/</code> operator. This is achieved by multiplying <code class="language-python">self</code> by <code class="language-python">other</code> raised to the power of \( -1 \). <br /> <br />
+              <code class="language-python">__truediv__</code> method allows performing true division by the <code class="language-python">Value</code> instance. It returns the result of dividing <code class="language-python">self</code> by <code class="language-python">other</code> using the <code class="language-python">/</code> operator. This is achieved by multiplying <code class="language-python">self</code> by <code class="language-python">other</code> raised to the power of \( -1 \). <br /> <br />
             </li>
 
             <li>
@@ -745,9 +745,9 @@
 
           Overall, the <code class="language-python">draw_dot</code> function generates a visualization of the computational graph rooted at a given node by creating nodes and edges in a <code class="language-python">Digraph</code> object using Graphviz. The nodes represent the <code class="language-python">Value</code> instances in the graph, and the edges represent the dependencies between the nodes based on their parent-child relationships. The labels of the nodes display information such as the node's label, data, and gradient.
 
-          <h3>Example 1: Compute a forward pass on vector values and visualize the computation graph</h3>
+          <h3>Example 1: Compute a forward pass on 2D array and visualize the computation graph</h3>
 
-          In this first example, we will perform a forward pass on the tanh function and subsequently visualize it. The inputs, weights, and biases will all be vectors with the same values to ensure accurate calculations. You can copy the code and modify these values to observe different results. <br /> <br />
+          In this first example, we will perform a forward pass on the tanh function and subsequently visualize it. The inputs, weights, and biases will all be 2D array with the same values to ensure accurate calculations. You can copy the code and modify these values to observe different results. <br /> <br />
 
           <script src="https://gist.github.com/x0axz/8eaf7656f854677cb501679867cbd281.js"></script>
 
@@ -951,7 +951,7 @@
 
           <h3>Project's code</h3>
           
-          <a href="https://github.com/x0axz/autograd">Here</a> is the project's repository, containing the necessary files. Inside the repository, you will discover an <a href="https://github.com/x0axz/autograd/blob/main/autograd/engine.py">engine.py</a> file where I implemented the code for the <code class="language-python">Value</code> class, and a <a href="https://github.com/x0axz/autograd/blob/main/autograd/library.py">library.py</a> file that includes the code for the neural network library. The library.py file imports the <code class="language-python">Value</code> class from the engine.py file. Furthermore, I have included a Jupyter <a href="https://github.com/x0axz/autograd/blob/main/notebook/N_dimensional_Autograd_Engine.ipynb">notebook</a> file, which you can export to an editor and experiment with.
+          <a href="https://github.com/x0axz/autograd">Here</a> is the project's repository, containing the necessary files. Inside the repository, you will discover an <a href="https://github.com/x0axz/autograd/blob/main/autograd/engine.py">engine.py</a> file where I implemented the code for the <code class="language-python">Value</code> class, and a <a href="https://github.com/x0axz/autograd/blob/main/autograd/library.py">library.py</a> file that includes the code for the neural network library. The library.py file imports the <code class="language-python">Value</code> class from the engine.py file. Furthermore, I have included a Jupyter <a href="https://github.com/x0axz/autograd/blob/main/notebook/Autograd_Engine_&_NN_Library.ipynb">notebook</a> file, which you can export to an editor and experiment with.
 
           <h3>References and further reading</h3>
 
