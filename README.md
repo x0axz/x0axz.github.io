@@ -7,3 +7,7 @@ As a software engineer, I've developed a deep fascination with the concept of ma
 I would genuinely value your input and insights. If you have any comments or suggestions, I would be incredibly grateful to hear from you. Additionally, if there are any specific resources or materials you believe would enrich my understanding or ignite further inspiration, please don't hesitate to share them.
 
 You can reach out to me at [x0axz] [at] [protonmail.com].
+
+## License
+
+MIT
